@@ -33,8 +33,8 @@ http://localhost:8080/api/v1/ubiq/encryptFile
 
 **Request Body:**
 {
-    "inputFilePath": "D:/My_Folder/Dev_Library/IntelliJ/Other/ubiq/Input/input.txt",
-    "outputFilePath": "D:/My_Folder/Dev_Library/IntelliJ/Other/ubiq/Output/encrypted/output.enc"
+    "inputFilePath": "D:/Input/input.txt",
+    "outputFilePath": "D:/Output/encrypted/output.enc"
 }
 
 **Response:**\
@@ -48,8 +48,8 @@ http://localhost:8080/api/v1/ubiq/decryptFile
 
 **Request Body:**
 {
-    "inputFilePath": "D:/My_Folder/Dev_Library/IntelliJ/Other/ubiq/Output/encrypted/output.enc",
-    "outputFilePath": "D:/My_Folder/Dev_Library/IntelliJ/Other/ubiq/Output/decrypted/output.txt"
+    "inputFilePath": "D:/Output/encrypted/output.enc",
+    "outputFilePath": "D:/Output/decrypted/output.txt"
 }
 
 **Response:**\
