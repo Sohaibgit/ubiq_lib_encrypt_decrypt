@@ -70,18 +70,24 @@ public class UbiqController {
         UbiqCredentials credentials = UbiqFactory.createCredentials(Credentials.ACCESS_KEY_ID, Credentials.SECRET_SIGNING_KEY, Credentials.SECRET_CRYPTO_ACCESS_KEY, null);
 
         try {
-            byte[] encryptedBytes = map.get("encryptedBytes");
-            byte[] decryptedBytes = UbiqDecrypt.decrypt(credentials, encryptedBytes);
+            if (map.size() != 0) {
+                byte[] encryptedBytes = map.get("encryptedBytes");
+                byte[] decryptedBytes = UbiqDecrypt.decrypt(credentials, encryptedBytes);
 
-            if (decryptedBytes != null) {
-                String decryptedOutput = new String(decryptedBytes);
+                if (decryptedBytes != null) {
+                    String decryptedOutput = new String(decryptedBytes);
 
-                response.setRespCode("00");
-                response.setRespDescription("Success");
-                response.setOutput(decryptedOutput);
+                    response.setRespCode("00");
+                    response.setRespDescription("Success");
+                    response.setOutput(decryptedOutput);
+                } else {
+                    response.setRespCode("-1");
+                    response.setRespDescription("Failed");
+                    response.setOutput(null);
+                }
             } else {
-                response.setRespCode("-1");
-                response.setRespDescription("Failed");
+                response.setRespCode("-4");
+                response.setRespDescription("Please encrypt some data first");
                 response.setOutput(null);
             }
         } catch (IllegalStateException ex) {
@@ -92,8 +98,7 @@ public class UbiqController {
             response.setRespCode("-1");
             response.setRespDescription(ex.getLocalizedMessage());
             response.setOutput(null);
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             LOGGER.error("Exception: ", ex);
 
             response.setRespCode("-1");
